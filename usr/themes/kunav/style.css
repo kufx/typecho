@@ -54,7 +54,6 @@ font-family: "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang
   .header-group {
     width: 100%;          /* 默认占满视口宽度 */
     max-width: 60%;       /* 最大宽度为视口宽度的60% */
-    margin: 0 auto;       /* 水平居中 */
     box-sizing: border-box; /* 包含内边距和边框 */
   }
 }
