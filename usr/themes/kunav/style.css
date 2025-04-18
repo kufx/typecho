@@ -35,7 +35,6 @@ font-family: "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang
 
 
     /* 通用容器 */
-    #footer,
     .category-group,
     .search-group,
     .header-group {
@@ -46,7 +45,9 @@ font-family: "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang
         transition: background 0.2s 0.1s; /* 增加0.1秒延迟 */
     }
 
-
+footer {
+text-align: center;
+}
 
 
 @media (min-width: 768px) { /* 断点可自定义（如1024px） */
