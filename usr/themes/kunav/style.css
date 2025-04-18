@@ -45,6 +45,22 @@ font-family: "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang
         transition: background 0.2s 0.1s; /* 增加0.1秒延迟 */
     }
 
+
+
+
+@media (min-width: 768px) { /* 断点可自定义（如1024px） */
+  .category-group,
+  .search-group,
+  .header-group {
+    width: 100%;          /* 默认占满视口宽度 */
+    max-width: 60%;       /* 最大宽度为视口宽度的60% */
+    margin: 0 auto;       /* 水平居中 */
+    box-sizing: border-box; /* 包含内边距和边框 */
+  }
+}
+
+
+
     /* 标题栏 */
     .header-group {
         padding: 8px 12px;
