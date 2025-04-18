@@ -10,6 +10,7 @@
 
    *{
    transition: all 0.2s; /* 增加0.1秒延迟 */
+   font-weight: bold;
    } 
     
 
