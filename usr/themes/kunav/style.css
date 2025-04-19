@@ -1242,7 +1242,28 @@ padding: 6px 8px;
     background: rgba(215, 245, 255, 0.1);
     border-color: rgba(160, 200, 240, 0.6);
     backdrop-filter: blur(2px);
+    position: relative;
 }
+
+.xm-mm.xm-unlocked::before {
+    content: "✓ 已解锁内容"; /* 提示文字 */
+    position: absolute;
+    top: -20px;
+    left: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(103, 194, 58, 1);
+    background: rgba(103, 194, 58, 0.1);
+    padding: 4px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(103, 194, 58, 1);
+    z-index: 1;
+}
+
+.xm-mm.xm-unlocked:hover::before {
+    box-shadow: 0 2px 12px 0 rgba(103,194,58,.4);
+}
+
 
 
 .xm-mm-input {
