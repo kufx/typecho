@@ -430,3 +430,33 @@ function parseTabField($content) {
 </div>
 HTML;
 }
+
+
+
+// 回复可见
+Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('z97hide','one');
+Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('z97hide','one');
+class z97hide {
+    public static function one($con,$obj,$text)
+    {
+      $text = empty($text)?$con:$text;
+      if(!$obj->is('single')){
+      $text = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'',$text);
+      }
+      
+      return $text;
+}
+}
+// 登录可见
+Typecho_Plugin::factory('Widget_Abstract_Contents')->excerptEx = array('z97login','one');
+Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = array('z97login','one');
+class z97login {
+    public static function one($con,$obj,$text)
+    {
+      $text = empty($text)?$con:$text;
+      if(!$obj->is('single')){
+      $text = preg_replace("/\[login\](.*?)\[\/login\]/sm",'',$text);
+      }
+      return $text;
+    }
+}
