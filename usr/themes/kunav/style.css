@@ -1206,3 +1206,20 @@ padding: 6px 8px;
 }
 
 
+.login_reply2view {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #6c757d;
+}
+
+.reply2view {
+    background-color: #e9ecef;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #495057;
+}
