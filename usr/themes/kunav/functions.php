@@ -481,5 +481,50 @@ class z97login {
 
 
 
+function themeContentFilter($content, $widget)
+{
+    $request = Typecho_Request::getInstance();
+    
+    // 处理密码验证
+    if ($request->isPost() && $request->get('mm') === 'ok') {
+        $content = preg_replace_callback(
+            '/{mm id="(.+?)"}(.+?){\/mm}/s',
+            function ($match) use ($request) {
+                if ($request->get('pass') === $match[1]) {
+                    // 验证通过时添加包裹容器
+                    return '<div class="xm-mm xm-unlocked">'.$match[2].'</div>';
+                }
+                return $match[0]; // 保持原始代码用于后续处理
+            },
+            $content
+        );
+    }
 
+    // 处理未验证内容
+    if (strpos($content, '{mm') !== false) {
+        $content = preg_replace(
+            '/{mm id="(.+?)"}(.+?){\/mm}/s',
+            '<form action="?mm=ok" class="xm-mm" method="post">
+                <div class="xm-mm-input">
+                    <input type="password" 
+                           class="xm-mm-pass" 
+                           name="pass" 
+                           placeholder="请输入密码"
+                           required>
+                </div>
+                <div class="xm-mm-button">
+                    <button type="submit" class="xm-mm-submit">提交</button>
+                </div>
+            </form>',
+            $content
+        );
+    }
+
+    return $content;
+}
+// 挂载到主题初始化
+function themeInit($archive)
+{
+    Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = 'themeContentFilter';
+}
 
