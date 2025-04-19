@@ -481,39 +481,3 @@ class z97login {
 
 
 
-function themeMmLatex($content, $widget)
-{
-    // 处理密码验证部分
-    if ($widget->request->isPost() && $widget->request->get('mm') === 'ok') {
-        if (strpos($content, '{mm') !== false) {
-            $content = preg_replace_callback(
-                '/{mm id="(.+?)"}(.+?){\/mm}/',
-                function ($match) use ($widget) {
-                    return ($widget->request->get('pass') === $match[1]) ? $match[2] : $match[0];
-                },
-                $content
-            );
-        }
-    }
-
-    // 替换未验证的短代码为表单
-    if (strpos($content, '{mm') !== false) {
-        $content = preg_replace(
-            '/{mm id="(.+?)"}(.+?){\/mm}/',
-            '<form action="?mm=ok" class="xm-mm" method="post">
-                <div class="xm-mm-input">
-                    <input type="password" class="xm-mm-pass" name="pass" placeholder="请输入密码" required>
-                </div>
-                <div class="xm-mm-button">
-                    <button type="submit" class="xm-mm-submit">提交</button>
-                </div>
-            </form>',
-            $content
-        );
-    }
-
-    return $content;
-}
-
-// 挂载到文章渲染钩子
-Typecho_Plugin::factory('Widget_Archive')->afterRender = 'themeMmLatex';
