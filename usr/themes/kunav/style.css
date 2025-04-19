@@ -10,7 +10,7 @@
 
    *{
    transition: all 0.2s; /* 增加0.1秒延迟 */
-   font-weight: bold;
+   
    } 
     
 
@@ -206,6 +206,7 @@ z-index: -1;
         text-decoration: none;
         transition: all 0.2s;
         color: var(--text);
+        font-weight: bold;
     }
 
     /* 搜索框 */
@@ -978,7 +979,7 @@ background: transparent!important;
 }
 
 /* 黑暗模式适配 */
-[data-theme="dark"] .page-navigator a, [data-theme="dark"] #comments input, [data-theme="dark"] #comments textarea, [data-theme="dark"] .search-input {
+[data-theme="dark"] .page-navigator a, [data-theme="dark"] #comments input, [data-theme="dark"] #comments textarea {
     background: #616161;
     color: #e0e0e0;
 }
@@ -1086,6 +1087,7 @@ textarea {
   box-sizing: border-box;
   background: #f0f0f0;
   color: var(--text);
+  outline: none;
 }
 textarea {
   resize: vertical;
