@@ -479,43 +479,64 @@ class z97login {
 
 
 
+
+
+
+
 function themeContentFilter($content, $widget)
 {
-    $request = Typecho_Request::getInstance();
-    
-    // 处理密码验证
-    if ($request->isPost() && $request->get('mm') === 'ok') {
-        $content = preg_replace_callback(
-            '/{mm id="(.+?)"}(.+?){\/mm}/s',
-            function ($match) use ($request) {
-                if ($request->get('pass') === $match[1]) {
-                    // 验证通过时添加包裹容器
-                    return '<div class="xm-mm xm-unlocked">'.$match[2].'</div>';
-                }
-                return $match[0]; // 保持原始代码用于后续处理
-            },
-            $content
-        );
-    }
+    try {
+        $request = Typecho_Request::getInstance();
+        $isPost = $request->isPost() && $request->get('mm') === 'ok';
 
-    // 处理未验证内容
-    if (strpos($content, '{mm') !== false) {
-        $content = preg_replace(
-            '/{mm id="(.+?)"}(.+?){\/mm}/s',
-            '<form action="?mm=ok" class="xm-mm" method="post">
-                <div class="xm-mm-input">
-                    <input type="password" 
-                           class="xm-mm-pass" 
-                           name="pass" 
-                           placeholder="请输入密码"
-                           required>
-                </div>
-                <div class="xm-mm-button">
-                    <button type="submit" class="xm-mm-submit">提交</button>
-                </div>
-            </form>',
-            $content
-        );
+        // 第一阶段：处理密码验证
+        if ($isPost) {
+            $content = preg_replace_callback(
+                '/\{mm\s+id="([^"]+)"\}(.*?)\{\/mm\}/is',
+                function ($matches) use ($request) {
+                    static $securityChecked = false;
+                    // 防止多次检查
+                    if (!$securityChecked) {
+                        $securityChecked = true;
+                        // 增加CSRF保护
+                        if (!Typecho_Cookie::get('__typecho_uid')) {
+                            return $matches[0];
+                        }
+                    }
+
+                    $pass = $request->get('pass');
+                    if (!empty($pass) && $pass === $matches[1]) {
+                        return sprintf('<div class="xm-mm xm-unlocked">%s</div>', $matches[2]);
+                    }
+                    return $matches[0];
+                },
+                $content
+            );
+        }
+
+        // 第二阶段：替换未验证区块
+        $pattern = '/\{mm\s+id="([^"]+)"\}(.*?)\{\/mm\}/is';
+        if (preg_match_all($pattern, $content, $matches)) {
+            $form = '<form action="%s" class="xm-mm" method="post">'
+                  . '<input type="hidden" name="mm" value="ok">'
+                  . '<div class="xm-mm-input">'
+                  . '<input type="password" class="xm-mm-pass" name="pass" placeholder="请输入密码" required>'
+                  . '</div>'
+                  . '<div class="xm-mm-button">'
+                  . '<button type="submit" class="xm-mm-submit">提交</button>'
+                  . '</div>'
+                  . '</form>';
+
+            $content = preg_replace(
+                $pattern,
+                sprintf($form, Typecho_Common::url($_SERVER['REQUEST_URI'], null)),
+                $content
+            );
+        }
+
+    } catch (Exception $e) {
+        // 记录错误日志
+        Typecho_Log::add($e->getMessage(), Typecho_Log::ERROR);
     }
 
     return $content;
