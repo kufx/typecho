@@ -8,7 +8,9 @@
 <h1 class="site-title"><?php $this->title() ?></h1>
 
 <!-- 回复&登录可见 -->
-<?php
+                <?php
+
+
 // 处理密码可见逻辑
 if ($this->request->isPost() && $this->request->mm === 'ok') {
     if (strpos($this->content, '{mm') !== false) {
@@ -32,36 +34,35 @@ if (strpos($this->content, '{mm') !== false) {
     $this->content);
 }
 
-// 初始化内容处理
-$db = Typecho_Db::get();
-$sql = $db->select()->from('table.comments')
-       ->where('cid =?', $this->cid)
-       ->where('mail =?', $this->remember('mail', true))
-       ->where('status =?', 'approved')
-       ->limit(1);
-$result = $db->fetchAll($sql);
 
-$finalContent = getContentTest($this->content);
+                $db = Typecho_Db::get();
+                $sql = $db->select()->from('table.comments')
+                    ->where('cid =?',$this->cid)
+                    ->where('mail =?', $this->remember('mail',true))
+                    ->where('status =?', 'approved')
+                    ->limit(1);
+                $result = $db->fetchAll($sql);
+                
+                $finalContent = getContentTest($this->content);  // 先保存原始内容
+                
+                if($this->user->hasLogin()) {
+                    // 处理登录可见
+                    $finalContent = preg_replace("/\[login\](.*?)\[\/login\]/sm",'<div class="login_reply2view jz jc ys">$1</div>', $finalContent);
+                } else {
+                    $finalContent = preg_replace("/\[login\](.*?)\[\/login\]/sm",'<div class="login_reply2view jz jc ys">此处内容需要<a href="/admin" target="_blank">登录</a>后方可阅读</div>', $finalContent);
+                }
+                
+                if($this->user->hasLogin() || $result) {
+                    // 处理回复可见
+                    $finalContent = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'<div class="reply2view jz jc ys">$1</div>', $finalContent);
+                } else {
+                    $finalContent = preg_replace("/\[hide\](.*?)\[\/hide\]/sm",'<div class="reply2view jz jc ys">此处内容需要<a href="#comments">评论</a>回复后（审核通过）方可阅读</div>', $finalContent);
+                }
+                
+                echo $finalContent;
+                ?>
+                <!-- 回复&登录可见 -->
 
-// 登录可见处理
-$loginPattern = "/$login$(.*?)$\/login$/sm";
-if ($this->user->hasLogin()) {
-    $finalContent = preg_replace($loginPattern, '<div class="login_reply2view">$1</div>', $finalContent);
-} else {
-    $finalContent = preg_replace($loginPattern, '<div class="login_reply2view">请<a href="/admin">登录</a>后查看</div>', $finalContent);
-}
-
-// 回复可见处理
-$hidePattern = "/$hide$(.*?)$\/hide$/sm";
-if ($this->user->hasLogin() || $result) {
-    $finalContent = preg_replace($hidePattern, '<div class="reply2view">$1</div>', $finalContent);
-} else {
-    $finalContent = preg_replace($hidePattern, '<div class="reply2view">请<a href="#comments">评论</a>后查看</div>', $finalContent);
-}
-
-echo $finalContent;
-?>
-<!-- 回复&登录可见 -->
 
                     
     </div>
