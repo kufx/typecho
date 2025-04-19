@@ -416,7 +416,7 @@ function parseTabField($content) {
                 }
                 
                 $linksHtml .= sprintf(
-                    '<a href="%s" class="link-item" target="_blank" rel="noopener">%s</a>',
+                    '<a href="%s" class="link-item" target="_blank" rel="noopener external nofollow noreferrer">%s</a>',
                     $finalUrl,
                     htmlspecialchars(trim($name))
                 );
