@@ -25,6 +25,35 @@
  
 <!-- 回复&登录可见 -->
                 <?php
+
+
+// 处理密码可见逻辑
+if ($this->request->isPost() && $this->request->mm === 'ok') {
+    if (strpos($this->content, '{mm') !== false) {
+        $this->content = preg_replace_callback('/{mm id="(.+?)"}(.+?){\/mm}/', function($match) {
+            // 添加 xm-unlocked 类名到包裹层
+            return ($this->request->pass === $match[1]) 
+                ? '<div class="xm-mm xm-unlocked">' . $match[2] . '</div>' 
+                : $match[0];
+        }, $this->content);
+    }
+}
+
+// 未通过验证时显示密码表单（保持不变）
+if (strpos($this->content, '{mm') !== false) {
+    $this->content = preg_replace('/{mm id="(.+?)"}(.+?){\/mm}/', 
+        '<form action="?mm=ok" class="xm-mm" method="post">
+            <div class="xm-mm-input">
+                <input type="password" class="xm-mm-pass" name="pass" placeholder="请输入密码">
+            </div>
+            <div class="xm-mm-button">
+                <button type="submit" class="xm-mm-submit">提交</button>
+            </div>
+        </form>', 
+    $this->content);
+}
+
+
                 $db = Typecho_Db::get();
                 $sql = $db->select()->from('table.comments')
                     ->where('cid =?',$this->cid)
