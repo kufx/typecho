@@ -34,16 +34,8 @@
         <div class="category-header">
             <div class="main-category">用户评论</div>
         </div>
-        <div style="padding: 20px; text-align: center; color: #666;">
-            评论功能开发中，敬请期待...
-        </div>
 
 <?php $this->need('comments.php'); ?>
-
-<ul class="post-near">
-        <li>上一篇: <?php $this->thePrev('%s', '没有了'); ?></li>
-        <li>下一篇: <?php $this->theNext('%s', '没有了'); ?></li>
-    </ul>
 
     </div>
    
