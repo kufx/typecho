@@ -221,6 +221,7 @@ z-index: -1;
         padding: 8px 12px;
         border: 1px solid #e0e0e0;
         border-radius: 8px;
+        background: #f0f0f0;
         font-size: 14px;
         outline: none;
         transition: all 0.2s ease;
@@ -977,7 +978,7 @@ background: transparent!important;
 }
 
 /* 黑暗模式适配 */
-[data-theme="dark"] .page-navigator a {
+[data-theme="dark"] .page-navigator a, [data-theme="dark"] #comments input, [data-theme="dark"] #comments textarea, [data-theme="dark"] .search-input {
     background: #616161;
     color: #e0e0e0;
 }
