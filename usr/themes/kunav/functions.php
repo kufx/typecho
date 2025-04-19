@@ -349,9 +349,10 @@ function getRedirectUrl($url)
 
 
 
+
 // 解析导航字段内容
 function parseTabField($content) {
-    $siteUrl = Helper::options()->siteUrl; // 获取站点地址
+    $siteUrl = Helper::options()->siteUrl;
     $content = trim(htmlspecialchars_decode($content));
     if (empty($content)) return '';
 
@@ -364,6 +365,16 @@ function parseTabField($content) {
     // 解析一级标题和二级导航
     if (!strpos($headerLine, ':')) return '';
     list($mainTitle, $subNavStr) = explode(':', $headerLine, 2);
+    
+    // 提取跳转类型参数
+    $redirectType = 1; // 默认中转页
+    $subNavStr = trim($subNavStr);
+    if (preg_match('/\.(\d+)\s*$/', $subNavStr, $matches)) {
+        $redirectType = intval($matches[1]);
+        $subNavStr = substr($subNavStr, 0, -strlen($matches[0]));
+    }
+    
+    // 处理子导航项
     $subNavs = array_map('trim', explode(',', rtrim(trim($subNavStr), '.')));
     
     $navHtml = '';
@@ -396,13 +407,17 @@ function parseTabField($content) {
                 list($name, $url) = explode('|', $line, 2);
                 $url = trim($url);
                 
-                // 添加 ?target= 参数
-                $finalUrl = $siteUrl . '?target=' . urlencode($url);
+                // 根据跳转类型生成链接
+                if ($redirectType === 0) {
+                    $finalUrl = htmlspecialchars($url);
+                } else {
+                    $encodedUrl = urlencode($url);
+                    $finalUrl = htmlspecialchars($siteUrl . '?target=' . $encodedUrl);
+                }
                 
-                // 构建链接
                 $linksHtml .= sprintf(
                     '<a href="%s" class="link-item" target="_blank" rel="noopener">%s</a>',
-                    htmlspecialchars($finalUrl),
+                    $finalUrl,
                     htmlspecialchars(trim($name))
                 );
             }
@@ -429,7 +444,8 @@ function parseTabField($content) {
     <div class="content-container">{$contentHtml}</div>
 </div>
 HTML;
-}
+}    
+    
 
 
 
