@@ -1223,3 +1223,88 @@ padding: 6px 8px;
     font-size: 14px;
     color: #495057;
 }
+
+
+
+.xm-mm {
+    max-width: 360px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background: var(--card);
+    border: 1px solid rgba(160, 200, 240, 0.6);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(255, 182, 193, 0.2);
+}
+
+.xm-unlocked {
+    border-radius: 10px;
+    padding: 1rem;
+    background: rgba(215, 245, 255, 0.1);
+    border-color: rgba(160, 200, 240, 0.6);
+    backdrop-filter: blur(2px);
+}
+
+
+.xm-mm-input {
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.xm-mm-pass {
+    width: 100%;
+    padding: 15px 25px;
+    border: 2px solid #ffb6c1;
+    border-radius: 15px;
+    font-size: 16px;
+    color: #ff69b4;
+    transition: all 0.3s ease;
+    background: var(--card)!important;
+}
+
+.xm-mm-pass:focus {
+    outline: none;
+    border-color: #ff69b4;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+    transform: scale(1.02);
+}
+
+.xm-mm-pass::placeholder {
+    color: #ffc0cb;
+    font-style: italic;
+}
+
+.xm-mm-button {
+    text-align: center;
+}
+
+.xm-mm-submit {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    color: white;
+    padding: 12px 35px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.xm-mm-submit:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 105, 180, 0.4);
+}
+
+.xm-mm-submit::before {
+    content: '♥';
+    position: absolute;
+    left: -20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.xm-mm-submit:hover::before {
+    left: 15px;
+    opacity: 1;
+}
