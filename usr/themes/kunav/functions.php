@@ -485,28 +485,34 @@ class z97login {
 
 function themeContentFilter($content, $widget)
 {
+    static $request;
+    static $isPost;
+    
     try {
-        $request = Typecho_Request::getInstance();
-        $isPost = $request->isPost() && $request->get('mm') === 'ok';
+        // 兼容性初始化
+        if (!isset($request)) {
+            $request = method_exists('Typecho_Request', 'getInstance') 
+                ? Typecho_Request::getInstance()
+                : new Typecho_Request();
+        }
+        if (!isset($isPost)) {
+            $isPost = method_exists($request, 'isPost') 
+                ? $request->isPost() 
+                : ($_SERVER['REQUEST_METHOD'] === 'POST');
+        }
 
-        // 第一阶段：处理密码验证
-        if ($isPost) {
+        // 版本兼容的正则表达式
+        $pattern = '/\{mm\s+id="([^"]+)"\}(.*?)\{\/mm\}/is';
+        
+        // 第一阶段：密码验证处理 (兼容PHP 5.3+)
+        if ($isPost && $request->get('mm') === 'ok') {
+            $pass = (string)$request->get('pass', '');
             $content = preg_replace_callback(
-                '/\{mm\s+id="([^"]+)"\}(.*?)\{\/mm\}/is',
-                function ($matches) use ($request) {
-                    static $securityChecked = false;
-                    // 防止多次检查
-                    if (!$securityChecked) {
-                        $securityChecked = true;
-                        // 增加CSRF保护
-                        if (!Typecho_Cookie::get('__typecho_uid')) {
-                            return $matches[0];
-                        }
-                    }
-
-                    $pass = $request->get('pass');
-                    if (!empty($pass) && $pass === $matches[1]) {
-                        return sprintf('<div class="xm-mm xm-unlocked">%s</div>', $matches[2]);
+                $pattern,
+                function ($matches) use ($pass) {
+                    if ($pass === $matches[1]) {
+                        return sprintf('<div class="xm-mm xm-unlocked">%s</div>', 
+                            htmlspecialchars($matches[2], ENT_QUOTES, 'UTF-8'));
                     }
                     return $matches[0];
                 },
@@ -514,32 +520,38 @@ function themeContentFilter($content, $widget)
             );
         }
 
-        // 第二阶段：替换未验证区块
-        $pattern = '/\{mm\s+id="([^"]+)"\}(.*?)\{\/mm\}/is';
-        if (preg_match_all($pattern, $content, $matches)) {
-            $form = '<form action="%s" class="xm-mm" method="post">'
-                  . '<input type="hidden" name="mm" value="ok">'
-                  . '<div class="xm-mm-input">'
-                  . '<input type="password" class="xm-mm-pass" name="pass" placeholder="请输入密码" required>'
-                  . '</div>'
-                  . '<div class="xm-mm-button">'
-                  . '<button type="submit" class="xm-mm-submit">提交</button>'
-                  . '</div>'
-                  . '</form>';
-
+        // 第二阶段：表单替换处理
+        if (preg_match_all($pattern, $content)) {
+            $form = '<form action="%s" method="post" class="xm-mm">%s</form>';
+            $hidden = '<input type="hidden" name="mm" value="ok">';
+            $input = '<div class="xm-mm-input"><input type="password" name="pass" placeholder="请输入密码" required></div>';
+            $button = '<div class="xm-mm-button"><button type="submit">提交</button></div>';
+            
             $content = preg_replace(
                 $pattern,
-                sprintf($form, Typecho_Common::url($_SERVER['REQUEST_URI'], null)),
+                sprintf(
+                    $form,
+                    htmlspecialchars($_SERVER['REQUEST_URI'], ENT_QUOTES, 'UTF-8'),
+                    $hidden . $input . $button
+                ),
                 $content
             );
         }
 
     } catch (Exception $e) {
-        // 记录错误日志
-        Typecho_Log::add($e->getMessage(), Typecho_Log::ERROR);
+        // 多版本日志记录
+        if (class_exists('Typecho_Log')) {
+            Typecho_Log::add($e->getMessage(), Typecho_Log::ERROR);
+        } else {
+            error_log("[Typecho_MM] " . $e->getMessage());
+        }
     }
-
+    
     return $content;
 }
 
-
+// 挂载到主题初始化
+function themeInit($archive)
+{
+    Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = 'themeContentFilter';
+}
