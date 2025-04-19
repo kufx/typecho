@@ -542,8 +542,4 @@ function themeContentFilter($content, $widget)
     return $content;
 }
 
-// 挂载到主题初始化
-function themeInit($archive)
-{
-    Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = 'themeContentFilter';
-}
+
