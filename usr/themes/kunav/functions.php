@@ -480,49 +480,35 @@ class z97login {
 
 
 
-function themeContentFilter($content, $widget)
-{
-    $request = Typecho_Request::getInstance();
-    
-    // 处理密码验证
-    if ($request->isPost() && $request->get('mm') === 'ok') {
-        $content = preg_replace_callback(
-            '/{mm id="(.+?)"}(.+?){\/mm}/s',
-            function ($match) use ($request) {
-                if ($request->get('pass') === $match[1]) {
-                    // 验证通过时添加包裹容器
-                    return '<div class="xm-mm xm-unlocked">'.$match[2].'</div>';
-                }
-                return $match[0]; // 保持原始代码用于后续处理
-            },
-            $content
-        );
-    }
+function get_comment_at($coid){
+    $db   = Typecho_Db::get();
+    $prow = $db->fetchRow($db->select('parent,status')->from('table.comments')
+        ->where('coid = ?', $coid));//当前评论
+    $mail = "";
+    $parent = @$prow['parent'];
+    if ($parent != "0") {//子评论
+        $arow = $db->fetchRow($db->select('author,status,mail')->from('table.comments')
+            ->where('coid = ?', $parent));//查询该条评论的父评论的信息
+        @$author = @$arow['author'];//作者名称
+        $mail = @$arow['mail'];
+        if(@$author && $arow['status'] == "approved"){//父评论作者存在且父评论已经审核通过
+            if (@$prow['status'] == "waiting"){
+                echo '<p class="commentReview">（评论正在审核中）</p>';
+            }
+            echo '<a href="#comment-' . $parent . '">@' . $author . '</a>';
+        }else{//父评论作者不存在或者父评论没有审核通过
+            if (@$prow['status'] == "waiting"){
+                echo '<p class="commentReview">（评论正在审核中）</p>';
+            }else{
+                echo '';
+            }
+        }
 
-    // 处理未验证内容
-    if (strpos($content, '{mm') !== false) {
-        $content = preg_replace(
-            '/{mm id="(.+?)"}(.+?){\/mm}/s',
-            '<form action="?mm=ok" class="xm-mm" method="post">
-                <div class="xm-mm-input">
-                    <input type="password" 
-                           class="xm-mm-pass" 
-                           name="pass" 
-                           placeholder="请输入密码"
-                           required>
-                </div>
-                <div class="xm-mm-button">
-                    <button type="submit" class="xm-mm-submit">提交</button>
-                </div>
-            </form>',
-            $content
-        );
+    } else {//母评论，无需输出锚点链接
+        if (@$prow['status'] == "waiting"){
+            echo '<p class="commentReview">（评论正在审核中）</p>';
+        }else{
+            echo '';
+        }
     }
-
-    return $content;
-}
-// 挂载到主题初始化
-function themeInit($archive)
-{
-    Typecho_Plugin::factory('Widget_Abstract_Contents')->contentEx = 'themeContentFilter';
 }
