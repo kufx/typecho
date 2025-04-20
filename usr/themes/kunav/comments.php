@@ -68,15 +68,16 @@ function threadedComments($comments, $options) {
 
 
 
-<li class="timenode <?php 
-if ($comments->_levels > 0) {
-    echo ' comment-child';
-    $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
+<li class="timenode <?php
+// 在评论循环中
+$isAuthor = checkUserType($comments->mail);
+if ($isAuthor) {
+    // 博主代码
+echo 'comment-by-author';
 } else {
-    echo ' comment-parent';
+    // 访客代码
+echo 'comment-by-user';
 }
-$comments->alt(' comment-odd', ' comment-even');
-echo $commentClass; 
 ?>" id="<?php $comments->theId(); ?>"> 
 <div class="header">
 <div class="user-info"> 
@@ -97,20 +98,17 @@ echo '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/ro
 
 
 <?php
-//博主样式
-
-$me = md5(strtolower('3111349763@qq.com')); //这里填入自己的邮箱
-$rz = md5(strtolower($comments->mail)); //用于判断邮箱
 $str =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#1ECD97;" >博主</span>';
-
 $str2 =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#C0C0C0;" >游客</span>';
-//开始判断
-if ($comments->authorId) {
-        if ($comments->authorId == $comments->ownerId) {echo $str;}}
-
-elseif($me==$rz){echo $str;}
-
-else{echo $str2;}        
+// 在评论循环中
+$isAuthor = checkUserType($comments->mail);
+if ($isAuthor) {
+    // 博主代码
+echo $str;
+} else {
+    // 访客代码
+echo $str2;
+}
 ?>
 
 
@@ -119,17 +117,17 @@ else{echo $str2;}
 <?php $comments->author(); ?></a>
 
 <?php
-$me = md5(strtolower('3111349763@qq.com')); //这里填入自己的邮箱
-$rz = md5(strtolower($comments->mail)); //用于判断邮箱
-//博主样式
 $str =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#1ECD97;" >博主</span>';
-
 $str2 =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#C0C0C0;" >游客</span>';
-//开始判断
-if ($comments->authorId) {
-        if ($comments->authorId == $comments->ownerId) {echo $str;}}
-elseif($me==$rz){echo $str;}
-else{echo $str2;}        
+// 在评论循环中
+$isAuthor = checkUserType($comments->mail);
+if ($isAuthor) {
+    // 博主代码
+echo $str;
+} else {
+    // 访客代码
+echo $str2;
+}
 ?>
 
 <?php endif; ?>
