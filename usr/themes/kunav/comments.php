@@ -92,7 +92,7 @@ else{echo $str2;}
 
 <?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
 
-<?php $comments->content(); ?>
+<?php echo getContentTest($comments->content); ?>
 <?php if ('waiting' == $comments->status): ?>
 <span style="color:#ff0000;font-weight:bold;float:right">评论正在审核中</span>
 <?php endif;?>
