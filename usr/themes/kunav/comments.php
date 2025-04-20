@@ -15,7 +15,16 @@
 
 
 
-<li class="timenode <?php if ($comments->mail == $options->adminEmail) echo 'author-comment'; ?>" id="<?php $comments->theId(); ?>"> 
+<li class="timenode <?php 
+if ($comments->_levels > 0) {
+    echo ' comment-child';
+    $comments->levelsAlt(' comment-level-odd', ' comment-level-even');
+} else {
+    echo ' comment-parent';
+}
+$comments->alt(' comment-odd', ' comment-even');
+echo $commentClass; 
+?>" id="<?php $comments->theId(); ?>"> 
 <div class="header">
 <div class="user-info"> 
 <?php $number=$comments->mail;
