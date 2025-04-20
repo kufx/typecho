@@ -529,15 +529,33 @@ function get_comment_at($coid){
 }
 
 
+
 function checkUserType($mail) {
-    $user = Typecho_Widget::widget('Widget_User');
+    // 强制初始化用户组件
+    Typecho_Widget::widget('Widget_User')->to($user);
     
-    // 获取博主邮箱
-    $authorMail = $user->mail ?? ''; // PHP 7.0+ 空合并运算符
-    
-    // 转换为小写比较更准确
+    // 获取当前用户邮箱（登录状态优先）
+    if ($user->hasLogin()) {
+        $authorMail = strtolower(trim($user->mail));
+    } 
+    // 未登录时获取默认博主邮箱
+    else {
+        $db = Typecho_Db::get();
+        $authorMail = $db->fetchRow($db->select('mail')
+            ->from('table.users')
+            ->where('uid = ?', 1) // 假设默认博主uid=1
+            ->limit(1))['mail'];
+        $authorMail = strtolower(trim($authorMail));
+    }
+
+    // 处理输入邮箱
     $inputMail = strtolower(trim($mail));
-    $authorMail = strtolower(trim($authorMail));
-    
-    return !empty($authorMail) && $inputMail === $authorMail;
+
+    // 增加空值保护
+    if (empty($authorMail) || empty($inputMail)) {
+        return false;
+    }
+
+    // 精确对比
+    return $inputMail === $authorMail;
 }
