@@ -935,17 +935,17 @@ background: transparent!important;
 /* 核心样式 */
 .owo-panel {
     display: none;
-    position: absolute;
+    position: relative;
     bottom: 40px;
     left: 0;
-    background: #fff;
-    border: 1px solid #ddd;
+    background: var(--card);
+    border: 1px solid var(--card3);
     border-radius: 6px;
-    padding: 10px;
-    width: 320px;
+    padding: 6px;
+    width: auto;
     max-height: 400px;
     overflow-y: auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     z-index: 999;
     grid-template-columns: repeat(5, 1fr);
     gap: 8px;
