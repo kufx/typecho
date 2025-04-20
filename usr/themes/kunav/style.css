@@ -910,6 +910,7 @@ background: transparent!important;
 
 /* OwO表情容器适配 */
 .OwO-container {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
@@ -928,6 +929,55 @@ background: transparent!important;
     width: 2em !important;
     height: 2em !important;
   }
+}
+
+
+/* 核心样式 */
+.owo-panel {
+    display: none;
+    position: absolute;
+    bottom: 40px;
+    left: 0;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    width: 320px;
+    max-height: 400px;
+    overflow-y: auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    z-index: 999;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.owo-item {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.owo-item:hover {
+    transform: scale(1.08);
+}
+
+.owo-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 3px;
+    border: 1px solid #eee;
+}
+
+.owo-empty {
+    padding: 10px;
+    color: #666;
+    text-align: center;
+}
+
+@media (max-width: 480px) {
+    .owo-panel {
+        width: 280px;
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 
