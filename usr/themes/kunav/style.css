@@ -6,6 +6,7 @@
         --text-meta:#ccc;
         --text-p1:#333;
         --card2: rgba(28, 208, 253, 0.2);
+        --card3: rgba(103, 194, 58, 0.2);
     }
     
     
@@ -1285,6 +1286,11 @@ padding: 6px 8px;
     opacity: 1;
 }
 
+#comments ol {
+padding-right: 8px;
+padding-left: 24px;
+}
+
 .tag-plugin.timeline{position:relative;padding-left:6px}
 .tag-plugin.timeline:before{content:'';position:absolute;z-index:0;background:var(--block-hover);width:4px;left:0;border-radius:8px;top:.5rem;bottom:0}
 .tag-plugin.timeline:has(.loading-wrap){padding-left:0}
@@ -1305,9 +1311,16 @@ text-decoration: none;
 .tag-plugin.timeline .timenode .header,.tag-plugin.timeline .timenode .header span{font-weight:500;color:var(--text-p3);line-height:1}
 .tag-plugin.timeline .timenode .header:before{content:'';position:absolute;left:-16px;width:4px;border-radius:12px;height:4px;top:calc(50% - .5 * 4px);background:var(--text-meta);transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-moz-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-webkit-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-o-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;transform:scale(2)}
 .tag-plugin.timeline .body{background:var(--card2);border-radius:12px;border-top-left-radius:2px;padding:.1rem 1rem;margin-top:4px;box-shadow:0 1px 4px 0 rgba(0,0,0,.1),0 2px 8px 0 rgba(0,0,0,.02)}
+.tag-plugin.timeline .author-comment .body{background:var(--card3);}
 .tag-plugin.timeline .body p{--fsp:calc(17px - 1px)}
 .tag-plugin.timeline .body p img{display:block}
 .tag-plugin.timeline .body:empty{display:none}
 .tag-plugin.timeline .body .highlight,.tag-plugin.timeline .body .tag-plugin,.tag-plugin.timeline .body ol,.tag-plugin.timeline .body p,.tag-plugin.timeline .body ul{margin:.5rem 0}.tag-plugin.timeline .body .tag-plugin.copy{width:240px}
 
 .tag-plugin.timeline .body blockquote{background:0 0;border-radius:0;padding:0 .5rem;margin:.75rem 0}.tag-plugin.timeline .body blockquote p{--fsp:calc(17px - 2px);margin:.25rem}.tag-plugin.timeline .body{line-height:1.5}.tag-plugin.timeline .body h1,.tag-plugin.timeline .body h2{font-size:1.25rem;margin:1rem 0;line-height:1.2}.tag-plugin.timeline .body h3,.tag-plugin.timeline .body h4{font-size:1rem;margin:.75rem 0;line-height:1.2}.tag-plugin.timeline .body h5,.tag-plugin.timeline .body h6{font-size:.9375rem;margin:.5rem 0;line-height:1.2}
+.timenode span.cm , .cm {
+      display: none;
+    }
+  .timenode:hover span.cm , .cm {
+      display: block;
+  }
