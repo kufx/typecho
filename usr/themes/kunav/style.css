@@ -1372,12 +1372,12 @@ color: var(--text);
 }
 
 .tag-plugin.timeline .timenode .header .user-info span a:hover {
-color: #da634b;
+color: #FF4500;
 }
 
 .tag-plugin.timeline .timenode .header .cm a {
 text-decoration: none;
-color: #da634b;
+color: #FF4500;
 }
 
 .tag-plugin.timeline .timenode .header .cm a:hover {
@@ -1392,7 +1392,7 @@ text-decoration: none;
 
 .tag-plugin.timeline .timenode .body a:hover {
 text-decoration: none;
-color: #da634b;
+color: #FF4500;
 }
 
 .tag-plugin.timeline .timenode .header,.tag-plugin.timeline .timenode .header span{font-weight:500;color:var(--text-p3);line-height:1}
