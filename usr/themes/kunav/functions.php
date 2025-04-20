@@ -181,7 +181,15 @@ GitHub|https://github.com')
     $form->addInput($goodLinks);
 
 
-
+// 新增底部footer自定义内容
+    $footer = new \Typecho\Widget\Helper\Form\Element\Textarea(
+        'footer',
+        null,
+        null,
+        _t('网站底部内容html'),
+        _t('自定义的底部内容')
+    );
+    $form->addInput($footer);
 
 
 
