@@ -1,11 +1,111 @@
-<?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
+<?php function threadedComments($comments, $options) {
+    $commentClass = '';
+    if ($comments->authorId) {
+        if ($comments->authorId == $comments->ownerId) {
+            $commentClass .= ' comment-by-author';  //如果是文章作者的评论添加 .comment-by-author 样式
+        } else {
+            $commentClass .= ' comment-by-user';  //如果是评论作者的添加 .comment-by-user 样式
+        }
+    } 
+    $commentLevelClass = $comments->_levels > 0 ? ' comment-child' : ' comment-parent';  //评论层数大于0为子级，否则是父级
+?>
+
+
+
+
+
+
+<li class="timenode" id="<?php $comments->theId(); ?>"> 
+<div class="header">
+<div class="user-info"> 
+<?php $number=$comments->mail;
+if(preg_match('|^[1-9]\d{4,11}@qq\.com$|i',$number)){
+echo '<img src="https://q2.qlogo.cn/headimg_dl? bs='.$number.'&dst_uin='.$number.'&dst_uin='.$number.'&;dst_uin='.$number.'&spec=100&url_enc=0&referer=bu_interface&term_type=PC">'; 
+}else{
+echo '<img src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/avatar/round/3442075.svg">';
+}
+?>
+<span style="font-weight:bold">
+
+
+<?php if ($comments->url): ?>
+<a href="<?php echo $comments->url ?>" target="_blank" rel="external nofollow">
+<?php echo $comments->author ?>
+</a>
+
+
+<?php
+//博主样式
+
+$me = md5(strtolower('3111349763@qq.com')); //这里填入自己的邮箱
+$rz = md5(strtolower($comments->mail)); //用于判断邮箱
+$str =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#1ECD97;" >博主</span>';
+
+$str2 =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#C0C0C0;" >游客</span>';
+//开始判断
+if ($comments->authorId) {
+        if ($comments->authorId == $comments->ownerId) {echo $str;}}
+
+elseif($me==$rz){echo $str;}
+
+else{echo $str2;}        
+?>
+
+
+<?php else: ?>
+<a href="<?php $comments->permalink();?>">
+<?php $comments->author(); ?></a>
+
+<?php
+$me = md5(strtolower('3111349763@qq.com')); //这里填入自己的邮箱
+$rz = md5(strtolower($comments->mail)); //用于判断邮箱
+//博主样式
+$str =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#1ECD97;" >博主</span>';
+
+$str2 =  '<span style="color: #FFF;padding: .1rem .25rem;font-size: .7rem;border-radius: .25rem;background-color:#C0C0C0;" >游客</span>';
+//开始判断
+if ($comments->authorId) {
+        if ($comments->authorId == $comments->ownerId) {echo $str;}}
+elseif($me==$rz){echo $str;}
+else{echo $str2;}        
+?>
+
+<?php endif; ?>
+</span>
+
+</div> 
+<span>
+<?php $comments->date('Y/n/j H:i:s'); ?></span>
+&nbsp<span class=cm><b><?php $comments->reply('回复'); ?></b>
+</span>
+</div>
+<div class="body">
+
+<?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
+
+<?php $comments->content(); ?>
+<?php if ('waiting' == $comments->status): ?>
+<span style="color:#ff0000;font-weight:bold;float:right">评论正在审核中</span>
+<?php endif;?>
+</div>
+</li>
+
+
+
+<?php if ($comments->children) { ?>
+      <?php $comments->threadedComments($options); ?>
+    <?php } ?>
+ 
+<?php } ?>
+
+
 <div id="comments">
     <?php $this->comments()->to($comments); ?>
     <?php if ($comments->have()): ?>
         <h3><?php $this->commentsNum(_t('暂无评论'), _t('仅有一条评论'), _t('已有 %d 条评论')); ?></h3>
-
+<div class="tag-plugin timeline ds-fcircle">
         <?php $comments->listComments(); ?>
-
+</div>
         <?php $comments->pageNav('&laquo; 前一页', '后一页 &raquo;'); ?>
 
     <?php endif; ?>
