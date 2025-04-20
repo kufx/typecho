@@ -15,7 +15,7 @@
 
 
 
-<li class="timenode" id="<?php $comments->theId(); ?>"> 
+<li class="timenode <?php if ($comments->mail == $options->adminEmail) echo 'author-comment'; ?>" id="<?php $comments->theId(); ?>"> 
 <div class="header">
 <div class="user-info"> 
 <?php $number=$comments->mail;
