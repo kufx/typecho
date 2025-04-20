@@ -893,8 +893,8 @@ background: transparent!important;
 .OwO-item {
   display: inline-block !important;
   vertical-align: middle !important;
-  width: 1em !important;
-  height: 1em !important;
+  width: 1.5em !important;
+  height: 1.5em !important;
   margin: 0 0.1em !important;
   border: none !important;
   box-shadow: none !important;
@@ -925,8 +925,8 @@ background: transparent!important;
 /* 移动端优化 */
 @media (max-width: 768px) {
   .emoji-inline {
-    width: 1.5em !important;
-    height: 1.5em !important;
+    width: 2em !important;
+    height: 2em !important;
   }
 }
 
