@@ -1136,16 +1136,27 @@ padding-left: 24px;
 }
 
 
+
 /* Comment reply */
 .comment-list .respond {
-  margin-top: 15px;
+  margin-top: 8px;
   border-top: 1px solid #EEE;
 }
 .respond .cancel-comment-reply {
   float: right;
-  margin-top: 15px;
+  margin-right: 8px;
+  margin-top: 8px;
+  margin-bottom: 4px;
   font-size: .92857em;
+  
 }
+
+
+.respond .cancel-comment-reply a {
+text-decoration: none;
+}
+
+
 #comment-form label {
   display: block;
   margin-bottom: .5em;
