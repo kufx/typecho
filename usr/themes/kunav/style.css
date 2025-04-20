@@ -1311,7 +1311,7 @@ text-decoration: none;
 .tag-plugin.timeline .timenode .header,.tag-plugin.timeline .timenode .header span{font-weight:500;color:var(--text-p3);line-height:1}
 .tag-plugin.timeline .timenode .header:before{content:'';position:absolute;left:-16px;width:4px;border-radius:12px;height:4px;top:calc(50% - .5 * 4px);background:var(--text-meta);transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-moz-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-webkit-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;-o-transition:background .2s ease-out,height .2s ease-out,top .2s ease-out,transform .2s ease-out;transform:scale(2)}
 .tag-plugin.timeline .body{background:var(--card2);border-radius:12px;border-top-left-radius:2px;padding:.1rem 1rem;margin-top:4px;box-shadow:0 1px 4px 0 rgba(0,0,0,.1),0 2px 8px 0 rgba(0,0,0,.02)}
-.tag-plugin.timeline .author-comment .body{background:var(--card3);}
+.tag-plugin.timeline .comment-by-author .body{background:var(--card3);}
 .tag-plugin.timeline .body p{--fsp:calc(17px - 1px)}
 .tag-plugin.timeline .body p img{display:block}
 .tag-plugin.timeline .body:empty{display:none}
