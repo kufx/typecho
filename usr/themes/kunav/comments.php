@@ -1,4 +1,57 @@
-<?php function threadedComments($comments, $options) {
+<?php 
+
+
+function getGlobalEmotionCache() {
+    $cacheKey = 'emotion_global_cache'; // 数据库中的缓存键名
+    $cacheHours = 1; // 缓存小时数
+    
+    // 尝试读取数据库缓存
+    if ($cached = Helper::options()->{$cacheKey}) {
+        $data = json_decode($cached, true);
+        if ($data['expire'] > time()) {
+            return $data['list']; // 返回有效缓存
+        }
+    }
+    
+    // 无缓存或过期时解析数据
+    $rawData = Helper::options()->emoji_links;
+    $processed = [];
+    
+    if (!empty($rawData)) {
+        foreach (explode("\n", $rawData) as $line) {
+            $line = trim($line);
+            if (empty($line)) continue;
+            
+            $parts = explode('|', $line, 2);
+            if (count($parts) === 2) {
+                $processed[] = [
+                    'name' => htmlspecialchars(trim($parts[0])),
+                    'url' => htmlspecialchars(trim($parts[1]))
+                ];
+            }
+        }
+    }
+    
+    // 更新数据库缓存
+    $db = Typecho_Db::get();
+    $db->query($db->update('table.options')
+        ->rows(['value' => json_encode([
+            'expire' => time() + ($cacheHours * 3600),
+            'list' => $processed
+        ])])
+        ->where('name = ?', 'theme:' . Helper::options()->theme . '_' . $cacheKey)
+    );
+    
+    return $processed;
+}
+
+// 获取全局缓存数据
+$emotionList = getGlobalEmotionCache();
+
+
+
+
+function threadedComments($comments, $options) {
     $commentClass = '';
     if ($comments->authorId) {
         if ($comments->authorId == $comments->ownerId) {
@@ -162,6 +215,62 @@ else{echo $str2;}
 <?php $security = $this->widget('Widget_Security'); ?>
             <input type="hidden" name="_" value="<?php echo $security->getToken($this->request->getReferer())?>">
 
+<div class="OwO-container">
+    <button type="button" class="owo-trigger link-item">插入表情</button>
+    <div class="owo-panel">
+        <?php if (!empty($emotionList)): ?>
+            <?php foreach ($emotionList as $item): ?>
+                <div class="owo-item" 
+                     data-name="<?php echo $item['name']; ?>"
+                     title="<?php echo $item['name']; ?>">
+                    <img src="<?php echo $item['url']; ?>" 
+                         alt="<?php echo $item['name']; ?>">
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <div class="owo-empty"> 暂无表情</div>
+        <?php endif; ?>
+    </div>
+</div>
+
+
+<script>
+// 确保替换为你的评论框ID
+const commentField = document.getElementById('textarea');
+
+document.addEventListener('DOMContentLoaded', function() {
+    const trigger = document.querySelector('.owo-trigger');
+    const panel = document.querySelector('.owo-panel');
+
+    // 切换面板
+    if (trigger && panel) {
+        trigger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            panel.style.display = panel.style.display === 'grid' ? 'none' : 'grid';
+        });
+    }
+
+    // 点击外部关闭
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.owo-container')) {
+            panel.style.display = 'none';
+        }
+    });
+
+    // 插入表情
+    document.querySelectorAll('.owo-item').forEach(item => {
+        item.addEventListener('click', function() {
+            if (commentField) {
+                const emojiName = this.dataset.name;
+                commentField.value += ` [emoji "${emojiName}"] `;
+                commentField.focus();
+            }
+        });
+    });
+});
+            </script>
+
+                        
 <script type="text/javascript">
 (function () {
     window.TypechoComment = {
