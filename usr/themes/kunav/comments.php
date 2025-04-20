@@ -121,7 +121,7 @@ else{echo $str2;}
 
     <?php if ($this->allow('comment')): ?>
         <div id="<?php $this->respondId(); ?>" class="respond">
-            <div class="cancel-comment-reply">
+            <div class="cancel-comment-reply link-item">
                 <?php $comments->cancelReply(); ?>
             </div>
 
