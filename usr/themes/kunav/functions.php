@@ -520,3 +520,17 @@ function get_comment_at($coid){
         }
     }
 }
+
+
+function checkUserType($mail) {
+    $user = Typecho_Widget::widget('Widget_User');
+    
+    // 获取博主邮箱
+    $authorMail = $user->mail ?? ''; // PHP 7.0+ 空合并运算符
+    
+    // 转换为小写比较更准确
+    $inputMail = strtolower(trim($mail));
+    $authorMail = strtolower(trim($authorMail));
+    
+    return !empty($authorMail) && $inputMail === $authorMail;
+}
