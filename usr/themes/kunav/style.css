@@ -23,7 +23,7 @@
     * {
         margin: 0;
         box-sizing: border-box;
-font-family: system-ui, "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei","Microsoft Yahei", serif;
+font-family: serif, "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei","Microsoft Yahei", serif, system-ui;
     }
 
     body {
@@ -1118,8 +1118,8 @@ table th {
 }
 
 .article-content h1, h2, h3, h4, h5, h6 {
-  font-family: "LXGW WenKai", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei","Microsoft Yahei", sans-serif;
-
+  font-family: serif, "LXGW WenKai", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei","Microsoft Yahei", sans-serif, system-ui;
+  font-weight: bolder;
 }
 
 .article-content h1{
