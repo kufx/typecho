@@ -1233,12 +1233,13 @@ padding: 6px 8px;
 }
 
 .reply2view {
-    background-color: #e9ecef;
+    background-color: rgba(215, 245, 255, 0.1);
+    margin-top: 2em;
     padding: 10px;
     border: 1px solid #ced4da;
     border-radius: 5px;
     font-size: 14px;
-    color: #495057;
+    color: var(--text); 
     position: relative;
 }
 
