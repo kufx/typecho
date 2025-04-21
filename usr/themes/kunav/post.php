@@ -42,7 +42,7 @@ if ($this->request->isPost() && $this->request->mm === 'ok') {
 // 未通过验证时显示密码表单（保持不变）
 if (strpos($this->content, '{mm') !== false) {
     $this->content = preg_replace('/{mm id="(.+?)"}(.+?){\/mm}/', 
-        '<form action="" class="xm-mm" method="post">
+        '<form action="?mm=ok" class="xm-mm" method="post">
             <div class="xm-mm-input">
                 <input type="password" class="xm-mm-pass" name="pass" placeholder="请输入密码">
             </div>
