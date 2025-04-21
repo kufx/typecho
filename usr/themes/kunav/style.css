@@ -935,15 +935,15 @@ background: transparent!important;
 /* 核心样式 */
 .owo-panel {
     display: none;
-    position: relative;
-    bottom: 40px;
+    position: flex;
+    bottom: 8px;
     left: 0;
     background: var(--card);
     border: 1px solid var(--card3);
     border-radius: 6px;
     padding: 6px;
     width: auto;
-    max-height: 400px;
+    max-height: 200px;
     overflow-y: auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     z-index: 999;
@@ -1190,7 +1190,8 @@ padding-left: 24px;
 /* Comment reply */
 .comment-list .respond {
   margin-top: 8px;
-  border-top: 1px solid #EEE;
+  border-top: 1px solid var(--text-meta);
+  max-width: 100%;
 }
 .respond .cancel-comment-reply {
   float: right;
