@@ -11,7 +11,7 @@
     
     <div class="content-container" style="position: relative; min-height: 120px;">
         <p style="margin: 12px 8px; color: #666; font-size: 14px; line-height: 1.6;">
-            <?php _e("您即将离开<span style=\"color:#f00;font-weight:bold;\"> " . $this->options->title . " </span>，<br>前往外部网站<span style=\"color:#3b82f6;\"> " . $target . " </span>，请注意您的个人隐私和财产安全。<br><span id='countdown' style=\"color:red;font-weight:bold;\">5</span> 秒后自动跳转<br><span id=\"busuanzi_container_site_pv\">本站总访问量<span id=\"busuanzi_value_site_pv\" style=\"color:red;font-weight:bold;\"></span>次</span>") ?>
+            <?php _e("您即将离开<span style=\"color:#f00;font-weight:bold;\"> " . $this->options->title . " </span>，<br>前往外部网站<span style=\"color:#3b82f6;\"> " . $target . " </span>，请注意您的个人隐私和财产安全。<br><span id='countdown' style=\"color:red;font-weight:bold;\">5</span> 秒后自动跳转") ?>
         </p>
 
         <div style="position: absolute; right: 8px; bottom: 8px;">
@@ -38,6 +38,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
 });
 </script>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <?php $this->need('js.php'); ?>
 <?php $this->need('footer.php'); ?>
