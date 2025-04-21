@@ -925,8 +925,8 @@ background: transparent!important;
 /* 移动端优化 */
 @media (max-width: 768px) {
   .emoji-inline {
-    width: 2em !important;
-    height: 2em !important;
+    width: 1.8em !important;
+    height: auto !important;
   }
 }
 
