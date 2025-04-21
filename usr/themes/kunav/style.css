@@ -23,7 +23,7 @@
     * {
         margin: 0;
         box-sizing: border-box;
-font-family: "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei","Microsoft Yahei", serif;
+font-family: system-ui, "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei","Microsoft Yahei", serif;
     }
 
     body {
