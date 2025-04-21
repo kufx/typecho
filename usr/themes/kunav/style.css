@@ -207,7 +207,7 @@ z-index: -1;
         border-radius: 4px;
         text-align: center;
         text-decoration: none;
-        transition: all 0.2s;
+        transition: color .5s,background-color .5s;
         color: var(--text);
         font-weight: bold;
     }
@@ -240,7 +240,6 @@ z-index: -1;
         color: #fff;
         border-color: #FD6EA3;
         background: #FD6EA3;
-        transform: translateY(-1px);
         box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         z-index: 1;
     }
