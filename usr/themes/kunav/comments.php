@@ -141,9 +141,13 @@ echo $str2;
 </div>
 <div class="body">
 
-<?php $parentMail = get_comment_at($comments->coid)?><?php echo $parentMail;?>
-
-<?php echo getContentTest($comments->content); ?>
+<?php
+// 合并成单行输出
+echo '<p>';
+echo get_comment_at($comments->coid);
+echo '</p>';
+echo getContentTest($comments->content);
+?>
 <?php if ('waiting' == $comments->status): ?>
 <span style="color:#ff0000;font-weight:bold;float:right">评论正在审核中</span>
 <?php endif;?>
