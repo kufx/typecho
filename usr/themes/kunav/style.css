@@ -10,7 +10,7 @@
     --block: #f1f2f3;
   --block-border: #e3e5e8;
   --block-hover: #e9eaec;
-    --fsp: 12px;
+    --fsp: 13px;
     }
     
     
@@ -1119,7 +1119,7 @@ table {
   margin: 1rem 0;
   max-width: 100%;
   vertical-align: text-top;
-  --fsp: calc(12px - 2px);
+  --fsp: calc(13px - 2px);
   font-size: var(--fsp);
   transition: background-color .5s,border-color .5s;
 }
@@ -1476,6 +1476,12 @@ color: #FF4500;
 
 .tag-plugin.timeline .timenode .header .cm a:hover {
 color: #1cd0fd;
+}
+
+.tag-plugin.timeline .timenode .body {
+font-size: 14px;
+text-decoration: none;
+ 
 }
 
 .tag-plugin.timeline .timenode .body a {
