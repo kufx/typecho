@@ -327,7 +327,7 @@ if (empty($emoji_links)) {
 
 
 $pattern = '/\[searchtb\]/';
-    $replacement = '<center><body onclick="handleClickOutsideSearch()"><input type="text" style="background:var(--card);color:var(--text);font-family:inherit" id="searchInput" oninput="searchTables()" onfocus="expandSearchInput()" onmousedown="expandSearchInput()" ontouchstart="expandSearchInput()" 
+    $replacement = '<center><span id="rowCountMessage">此页面表格共 <span id="rowCount">?</span> 行</span><body onclick="handleClickOutsideSearch()"><input type="text" style="background:var(--card);color:var(--text);font-family:inherit" id="searchInput" oninput="searchTables()" onfocus="expandSearchInput()" onmousedown="expandSearchInput()" ontouchstart="expandSearchInput()" 
 placeholder="输入【关键词】搜索..."><span id="resultInfo"></span> </center>';
     $content = preg_replace($pattern, $replacement, $content);
 
