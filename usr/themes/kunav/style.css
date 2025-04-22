@@ -1168,6 +1168,7 @@ textarea {
   background: #f0f0f0;
   color: var(--text);
   outline: none;
+  border-color: var(--text-meta);
 }
 textarea {
   resize: vertical;
