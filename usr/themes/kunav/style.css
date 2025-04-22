@@ -856,7 +856,7 @@ text-decoration: none;
 }
 
 .article-content a:not(.tags a):hover {
-box-shadow: inset 0 -1.5em 0 rgba(33, 150, 243, 0.2); 
+box-shadow: inset 0 -1.5em 0 rgba(33, 150, 243, 0.2)!important; 
 color: rgba(33, 150, 243, 1);
 border-radius: 4px;
 transition: transform 0.2s all;
@@ -1138,6 +1138,11 @@ white-space: nowrap;
 table tr:hover {
   background: var(--block);
 }
+
+table a {
+box-shadow: none!important; 
+}
+
 
 .article-content h1, h2, h3, h4, h5, h6 {
   font-family: serif, "LXGW WenKai", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei","Microsoft Yahei", sans-serif, system-ui;
