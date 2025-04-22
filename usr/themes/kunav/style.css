@@ -1121,7 +1121,7 @@ table {
   margin: 1rem 0;
   max-width: 100%;
   vertical-align: text-top;
-  --fsp: calc(13px - 2px);
+  --fsp: calc(14px - 2px);
   font-size: var(--fsp);
   transition: background-color .5s,border-color .5s;
 }
