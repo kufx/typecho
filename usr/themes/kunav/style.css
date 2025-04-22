@@ -205,7 +205,7 @@ z-index: -1;
 
     /* 链接项 */
     .link-item {
-        border: 1px solid #e0e0e0;
+        border: .1px solid #e0e0e0;
         background: #f8f9fa;
         padding: 4px;
         border-radius: 4px;
