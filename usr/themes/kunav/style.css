@@ -1265,7 +1265,7 @@ padding: 6px 8px;
     margin: 2em auto;
     padding: 1em;
     border: 1px solid var(--text-meta);
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 14px;
     color: var(--text); 
     position: relative;
@@ -1317,9 +1317,9 @@ padding: 6px 8px;
 
 
 .xm-mm {
-    max-width: 360px;
+    /* max-width: 360px; */
     margin: 2rem auto;
-    padding: 2.5rem;
+    padding: 2rem;
     background: var(--card);
     border: 1px solid rgba(160, 200, 240, 0.6);
     border-radius: 20px;
