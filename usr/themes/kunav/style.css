@@ -1125,6 +1125,7 @@ table {
 }
 table th {
   background: var(--block);
+  transition: color .3s,background-color .3s;
 }
 table td,
 table th {
