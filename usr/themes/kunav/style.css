@@ -1121,6 +1121,7 @@ table {
   vertical-align: text-top;
   --fsp: calc(12px - 2px);
   font-size: var(--fsp);
+  transition: background-color .5s,border-color .5s;
 }
 table th {
   background: var(--block);
