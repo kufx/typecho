@@ -30,6 +30,7 @@
         margin: 0;
         box-sizing: border-box;
 font-family: serif, "LXGW WenKai", "Droid Serif", Georgia, "Times New Roman", "PingFang SC", "Hiragino Sans GB", "Source Han Sans CN", "WenQuanYi Micro Hei","Microsoft Yahei", serif, system-ui;
+    text-decoration: none;
     }
 
     body {
@@ -1471,12 +1472,12 @@ color: var(--text);
 color: #FF4500;
 }
 
-.tag-plugin.timeline .timenode .header .cm a {
+.tag-plugin.timeline .timenode .header .cm a, .tag-plugin.timeline span a {
 text-decoration: none;
 color: #FF4500;
 }
 
-.tag-plugin.timeline .timenode .header .cm a:hover {
+.tag-plugin.timeline .timenode .header .cm a:hover, .tag-plugin.timeline span:hover a {
 color: #1cd0fd;
 }
 
