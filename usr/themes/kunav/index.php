@@ -24,18 +24,18 @@ $this->need('head.php');
 
 <?php echo parseTabField(Helper::options()->subtab2); ?>
 
-<div class="category-group">
+<!-- <div class="category-group">
     <div class="category-header">
         <div class="main-category">带图标块</div>
     </div>    
     <div class="content-container">
-        <div class="content-grid always-show">
-<?php if ($iconLinks = getGoodLinks()): ?>
+        <div class="content-grid always-show"> 
+<?php if ($iconLinks = getGoodLinks()): ?> 
 <?php echo $iconLinks; ?>
 <?php endif; ?>          
         </div>
     </div>
-</div>
+</div>  -->
 
 
 <!-- 修正后的文章列表区块 -->
