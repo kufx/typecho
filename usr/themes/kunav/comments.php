@@ -134,20 +134,20 @@ echo $str2;
 </span>
 
 </div> 
-<span>
-<?php $comments->date('Y/n/j H:i:s'); ?></span>
+<?php
+// 合并成单行输出
+echo '<span>';
+echo get_comment_at($comments->coid);
+echo '</span>'; 
+?>
+<span class=cm>
+&nbsp<?php $comments->date('Y/n/j H:i'); ?></span>
 &nbsp<span class=cm><b><?php $comments->reply('回复'); ?></b>
 </span>
 </div>
 <div class="body">
 
-<?php
-// 合并成单行输出
-echo '<p>';
-echo get_comment_at($comments->coid);
-echo '</p>';
-echo getContentTest($comments->content);
-?>
+<?php echo getContentTest($comments->content); ?>
 <?php if ('waiting' == $comments->status): ?>
 <span style="color:#ff0000;font-weight:bold;float:right">评论正在审核中</span>
 <?php endif;?>
