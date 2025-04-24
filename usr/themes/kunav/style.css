@@ -13,6 +13,9 @@
     --fsp: 13px;
     --card4: rgb(0, 191, 255, 0.3);
   --card5: rgba(215, 245, 255, 0.2);
+    --accent-color: #42b983;
+    --level-colors: #2c3e50, #34495e, #7f8c8d, #95a5a6, #bdc3c7, #ecf0f1;
+    --nav-height: 60px;
     }
     
     
@@ -1552,3 +1555,152 @@ display:block;
       text-align: center;
       font-weight: bold;
     }
+
+
+/* CSS */
+.top-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: var(--text);
+  color: red;
+  font-size: 24px;
+  font-weight: bolder;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9999;
+}
+
+.top-btn.show {
+  opacity: 1;
+}
+
+.top-btn:hover {
+  background: var(--text);
+}
+
+
+
+
+
+/* 目录触发按钮 */
+        .toc-trigger {
+            position: fixed;
+            right: 0;
+            bottom: 30%;
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border-radius: 20px 20px 20px 20px;
+            box-shadow: -2px 2px 8px rgba(0,0,0,0.1);
+            display: grid;
+            place-items: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+
+        .toc-trigger:hover {
+            transform: translateX(-5px);
+        }
+
+        /* 目录容器 */
+        .toc-container {
+            position: fixed;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 260px;
+            height: 70vh;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .toc-container.active {
+            right: 20px;
+        }
+
+        /* 目录列表 */
+        .toc-list {
+            padding: 15px 0;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .toc-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .toc-list::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        /* 目录项样式 */
+        .toc-item {
+            position: relative;
+            padding: 12px 20px 12px 45px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toc-item::before {
+            content: '';
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            transition: all 0.3s;
+        }
+
+        /* 层级样式 */
+        .toc-item[data-level="1"] { color: #2c3e50; font-size: 16px; }
+        .toc-item[data-level="2"] { color: #34495e; font-size: 15px; padding-left: 55px; }
+        .toc-item[data-level="3"] { color: #7f8c8d; font-size: 14px; padding-left: 65px; }
+        .toc-item[data-level="4"] { color: #95a5a6; font-size: 13px; padding-left: 75px; }
+        .toc-item[data-level="5"] { color: #bdc3c7; font-size: 12px; padding-left: 85px; }
+        .toc-item[data-level="6"] { color: #ecf0f1; font-size: 12px; padding-left: 95px; }
+
+        /* 激活状态 */
+        .toc-item.active {
+            background: rgba(66, 185, 131, 0.08);
+            transform: translateX(-8px);
+        }
+
+        .toc-item.active::before {
+            background: var(--accent-color);
+            box-shadow: 0 0 8px rgba(66, 185, 131, 0.3);
+        }
+
+        /* 遮罩层 */
+        .toc-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 998;
+        }
+
+        .toc-mask.active {
+            opacity: 1;
+            pointer-events: all;
+        }
