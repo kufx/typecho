@@ -478,3 +478,78 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });</script>
+
+
+<script>
+	    let rafId;
+	    let lastCall = 0;
+	    function throttle(func, limit) {
+	        return function() {
+	            const now = new Date().getTime();
+	            if (now - lastCall < limit) {
+	                return;
+	            }
+	            lastCall = now;
+	            return func.apply(this, arguments);
+	        };
+	    }
+	    function updateProgress() {
+	        // 计算进度条高度
+	        const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+	        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+	        const progress = Math.floor((scrollTop / scrollHeight) * 100); // 使用 Math.floor 取整
+	        const progressBar = document.querySelector('.progress');
+	        progressBar.style.height = `${progress}%`;
+	        // 当网页向下滑动 20px 出现"返回顶部" 按钮
+	        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 20) {
+	            document.getElementById("myBtn").classList.add('active');
+	        } else {
+	            document.getElementById("myBtn").classList.remove('active');
+	        }
+	        rafId = window.requestAnimationFrame(updateProgress);
+	    }
+	    function startScrollListener() {
+	        updateProgress();
+	    }
+	    function stopScrollListener() {
+	        window.cancelAnimationFrame(rafId);
+	    }
+	    // 点击按钮，返回顶部
+	    function topFunction() {
+	        const startY = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop;
+	        const startTime = performance.now();
+	        const duration = 500; // 滚动持续时间，单位为毫秒，可根据需要调整
+	        function scrollToTop(currentTime) {
+	            const elapsed = currentTime - startTime;
+	            const progress = Math.min(elapsed / duration, 1);
+	            const ease = easeInOutCubic(progress); // 使用缓动函数
+	            const newY = startY * (1 - ease);
+	            document.body.scrollTop = newY;
+	            document.documentElement.scrollTop = newY;
+	            if (progress < 1) {
+	                window.requestAnimationFrame(scrollToTop);
+	            } else {
+	                stopScrollListener();
+	            }
+	        }
+	        window.requestAnimationFrame(scrollToTop);
+	    }
+	    // 缓动函数，这里使用的是 easeInOutCubic 函数，可以根据需要替换为其他缓动函数
+	    function easeInOutCubic(t) {
+	        return t < 0.5? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+	    }
+	    // 使用 throttle 函数对 updateProgress 进行节流
+	    const throttledUpdateProgress = throttle(updateProgress, 10);
+	    // 开始监听滚动事件
+	    window.addEventListener('scroll', throttledUpdateProgress);
+	    // 监听触摸事件，使在触摸设备上也能正常工作
+	    document.addEventListener('touchstart', function (e) {
+	        startScrollListener();
+	    });
+	    document.addEventListener('touchmove', function (e) {
+	        throttledUpdateProgress();
+	    });
+	    document.addEventListener('touchend', function (e) {
+	        stopScrollListener();
+	    });
+</script>
