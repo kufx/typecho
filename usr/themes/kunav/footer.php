@@ -1,14 +1,15 @@
 <?php if (!defined('__TYPECHO_ROOT_DIR__')) exit; ?>
 
 <button class="top-btn" title="回到顶部">↑</button>
-  
+ <?php if ($this->is('single')) : ?> 
 <!-- 目录结构 -->
     <div class="toc-trigger">📖</div>
     <div class="toc-mask"></div>
     <div class="toc-container">
         <ul class="toc-list" id="tocList"></ul>
     </div>
-    
+ <?php endif; ?>
+
 <footer id="footer" role="contentinfo">
     <?php if($this->options->footer): ?>
 <?php echo $this->options->footer(); ?>
