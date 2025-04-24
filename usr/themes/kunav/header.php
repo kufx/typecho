@@ -24,10 +24,6 @@
 --bg: <?php echo $this->options->backgroundColor(); ?>;
 }
 
-.site-title {
-color: <?php echo $this->options->backgroundColor(); ?>;
-}
-
 .link-item:hover {
         background: <?php echo $this->options->hoverColor(); ?>;
         border-color: <?php echo $this->options->hoverColor(); ?>!important;
