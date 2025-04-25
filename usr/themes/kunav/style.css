@@ -1159,6 +1159,7 @@ box-shadow: none!important;
 
 .article-content h1{
 text-align: center;
+overflow: auto;
 }
 
 
