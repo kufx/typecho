@@ -1071,7 +1071,9 @@ background: transparent!important;
 }
 
 
-
+b, strong {
+  background: linear-gradient(0, rgba(33, 150, 243, 0.5), rgba(33, 150, 243, 0.5)) no-repeat center bottom / 100% 40%;
+}
 
 pre { 
   background: #f0f0f0;
