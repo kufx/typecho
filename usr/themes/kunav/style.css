@@ -872,7 +872,7 @@ transition: transform 0.2s all;
 
 .article-content p {
 font-size: 14px;
-line-height: 1.5rem;
+line-height: 1.5;
 letter-spacing: 0.02em;
 margin: 0.3em 0;
 }
@@ -1080,10 +1080,10 @@ pre {
 }
 
 code { 
-padding: 2px 2px; 
+padding: 1px 1px; 
 color: #B94A48; 
 border-radius: 4px;
-border: 1px solid rgba(30, 205, 151, 0.15);
+border: .1px solid rgba(30, 205, 151, 0.15);
 background: rgba(30, 205, 151, 0.08);
 }
 
@@ -1103,7 +1103,7 @@ pre {
 
 
 pre code {
-  padding: 3px;
+  padding: 1px;
   border: none;
   color: var(--text);
   background: none;
