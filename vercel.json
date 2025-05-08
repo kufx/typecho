@@ -5,13 +5,8 @@
  }
   },
 
-    
 "routes": [
-    {
-      "src": "/((?!admin|feed|sitemap).+)",
-      "dest": "/api/index.php/$1",
-      "check": true
-    }
+ { "src": "/(.*)", "dest": "/api/index.php" }
 ]
 
     
