@@ -7,7 +7,7 @@
 
     
   "routes": [
-    // 1. 放行已知静态文件（必须优先）
+
     {
       "src": "/(usr|admin|var)/(.*\\.(css|js|png|jpg|gif|ico|webp|woff2))",
       "dest": "/$1/$2",
@@ -15,18 +15,18 @@
         "Cache-Control": "public, max-age=31536000, immutable"
       }
     },
-    // 2. 处理后台路径
+    
     {
       "src": "/admin(/?.*)",
       "dest": "/api/admin/index.php"
     },
-    // 3. 核心伪静态规则（精准匹配动态请求）
+    
     {
       "src": "/(archives|category|feed|sitemap|page|action)(/.*)?",
       "dest": "/api/index.php/$1$2",
       "check": true
     },
-    // 4. 其他请求回退到首页（避免无效请求消耗资源）
+    
     {
       "src": "/(.*)",
       "dest": "/api/index.php",
