@@ -4,7 +4,23 @@
    "runtime": "vercel-php@0.7.3"
  }
   },
+
   "routes": [
- { "src": "/(.*)", "dest": "/api/index.php" }
-  ]
+    // 排除静态文件（必须放在第一条）
+    {
+      "src": "/(.*\.(css|js|png|jpg|gif|ico|txt|xml))",
+      "dest": "/$1",
+      "headers": {
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    // 重写所有其他请求到 index.php
+    {
+      "src": "/(.*)",
+      "dest": "/index.php",
+      "continue": true
+    }
+  ]    
+
+    
 }
