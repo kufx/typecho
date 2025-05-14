@@ -106,7 +106,7 @@ $this->content = preg_replace_callback(
     <p class="tags">
         <?php $this->tags(" · ", true, " "); ?>
     </p>
-<p style="text-align:right;">更新于：<time datetime="2024-04-25T01:18:14.747Z"><?php echo date('Y-m-d H:i:s' , $this->modified); ?></time></p>
+<p style="text-align:right;">更新于：<time><?php echo date('Y-m-d H:i:s' , $this->modified + ($this->options->timezone - idate("Z"))); ?></time></p>
 
 
 <div class="post-nav">
