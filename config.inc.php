@@ -12,7 +12,7 @@ define('__TYPECHO_SECURE__',true);
 /** 定义根目录 */
 define('__TYPECHO_ROOT_DIR__', dirname(__FILE__));
 
-define('__TYPECHO_DEBUG__', true);
+/** define('__TYPECHO_DEBUG__', true); */
 
 /** 定义插件目录(相对路径) */
 define('__TYPECHO_PLUGIN_DIR__', '/usr/plugins');
