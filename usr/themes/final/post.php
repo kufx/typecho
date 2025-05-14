@@ -15,17 +15,7 @@
         <?php $this->category(" · "); ?>
 
 &nbsp
-<?php 
-// 简单的访问量统计实现
-$views = $this->db->fetchRow($this->db->select('views')->from('table.contents')->where('cid = ?', $this->cid));
-$viewsCount = $views['views'];
 
-// 更新访问量
-$this->db->query($this->db->update('table.contents')->rows(array('views' => $viewsCount + 1))->where('cid = ?', $this->cid));
-echo '阅 ' . ($viewsCount + 1);
-
-?>
-&nbsp
 
 <a href="#comments">评 <?php $this->commentsNum(); ?></a>
 &nbsp
