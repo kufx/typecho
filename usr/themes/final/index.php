@@ -13,7 +13,14 @@ if (!defined("__TYPECHO_ROOT_DIR__")) {
 }
 
 
-
+$path = $_SERVER["REQUEST_URI"];
+$tmp_file = "/tmp/".md5($path).".html";
+if(file_exists($tmp_file) && is_readable($tmp_file)){
+    $content = file_get_contents($tmp_file);
+    echo $content;
+    die();
+}
+ob_start();
 
 /** 文章置顶 */
 $sticky = $this->options->zd; //置顶的文章id，多个用|隔开
