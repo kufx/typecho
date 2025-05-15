@@ -1005,7 +1005,28 @@ button {
 
 
 
-
+input,
+input[type="text"],
+input[type="email"],
+input[type="url"],
+input[type="password"],
+textarea {
+  padding: 8px;
+  outline: none;
+  width: 100%;
+  border-radius: 8px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: var(--bg-color);
+  color: var(--text);
+  border-color: var(--text-color);
+}
+textarea {
+  resize: vertical;
+  max-width: 100%;
+ 
+}
 
 
 
