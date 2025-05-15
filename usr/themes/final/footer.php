@@ -59,7 +59,7 @@
   padding: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   transition: right 0.3s ease;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .theme-panel.show {
