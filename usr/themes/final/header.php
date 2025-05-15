@@ -28,9 +28,9 @@
         "style.css"
     ); ?>">
 
+<?php if ($this->options->commenton === "on" && $this->allow('comment') && $this->is('single')) : ?>
 <link rel="stylesheet" href="/usr/themes/final/comments.css">
-<script async src="https://npm.elemecdn.com/iconify-icon@1.0.7/dist/iconify-icon.min.js"></script>
-
+<?php endif; ?>
 
 <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" media="all">
 
