@@ -16,9 +16,10 @@
 
 &nbsp
 
-
+<?php if ($this->options->commenton === "on" && $this->allow('comment')) : ?>
 <a href="#comments">评 <?php $this->commentsNum(); ?></a>
 &nbsp
+    <?php endif; ?>
 <?php if($this->user->hasLogin()):?>
 <?php if ($this->is('post') or $this->is('page')): ?>
 <a target="_blank" href="<?php if ($this->is('post')): ?><?php $this->options->adminUrl(); ?>write-post.php?cid=<?php echo $this->cid;?><?php elseif ($this->is('page')): ?><?php $this->options->adminUrl(); ?>write-page.php?cid=<?php echo $this->cid;?><?php endif;?>" style="font-weight:bold"><?php _e
