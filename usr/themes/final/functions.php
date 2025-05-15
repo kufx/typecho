@@ -113,7 +113,7 @@ $form->addInput($commenton -> multiMode());
 $themechange = new Typecho_Widget_Helper_Form_Element_Radio('themechange', array(
     'on' => '开启切换按钮',
     'off' => '关闭切换按钮'
-), 'off', _t('全站评论显示控制'), _t('默认关闭切换按钮'));
+), 'off', _t('主题颜色切换显示控制'), _t('默认关闭切换按钮'));
 $form->addInput($themechange -> multiMode());    
 
 $sliderGroup = new Typecho_Widget_Helper_Form_Element_Radio(
@@ -145,7 +145,16 @@ $sliderGroup = new Typecho_Widget_Helper_Form_Element_Radio(
     _t('轮播图显示的高度，单位为px，默认300')
   );
   $form->addInput($sliderHeight);
-$announcementText = new Textarea(
+
+
+    $gg = new Typecho_Widget_Helper_Form_Element_Radio('gg', array(
+    'on' => '开启',
+    'off' => '关闭'
+), 'off', _t('关闭或开启公告'), _t('默认关闭'));
+$form->addInput($gg -> multiMode());
+    
+    
+    $announcementText = new Textarea(
     "announcementText",
     null,
     null,
