@@ -60,4 +60,7 @@
           </div> -->
 </div>
 
+
+<?php if ($this->options->gg === "on") : ?>    
 <?php $this->need("announcement.php"); ?>
+        <?php endif; ?>
