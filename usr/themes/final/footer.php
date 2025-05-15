@@ -156,15 +156,11 @@ function initThemePanel() {
 }
 
 // 切换面板显示
-// document.getElementById('themeBtn').addEventListener('click', () => {
-//  document.querySelector('.theme-panel').classList.toggle('show');
-// });
-
-// 修改后的点击事件处理（阻止事件冒泡）
-document.getElementById('themeBtn').addEventListener('click', function(e) {
-  e.stopPropagation(); // 阻止事件冒泡
+ document.getElementById('themeBtn').addEventListener('click', () => {
   document.querySelector('.theme-panel').classList.toggle('show');
-});
+ });
+
+
 
     
 // 加载保存的主题
@@ -179,21 +175,15 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // 点击外部关闭面板
-// document.addEventListener('click', (e) => {
-//   const panel = document.querySelector('.theme-panel');
-//   if (!panel.contains(e.target) && !e.target.matches('.theme-toggle')) {
-//     panel.classList.remove('show');
-//   }
-// });
+ document.addEventListener('click', (e) => {
+   const panel = document.querySelector('.theme-panel');
+   if (!panel.contains(e.target) && !e.target.matches('.theme-toggle')) {
+     panel.classList.remove('show');
+   }
+ });
 
 
-// 修改后的外部点击关闭逻辑
-document.addEventListener('click', (e) => {
-  const panel = document.querySelector('.theme-panel');
-  if (panel && !panel.contains(e.target) && !e.target.matches('.theme-toggle')) {
-    panel.classList.remove('show');
-  }
-});    
+
 
 </script>
 
