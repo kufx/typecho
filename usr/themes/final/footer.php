@@ -27,6 +27,7 @@
 
 </footer>
 
+<?php if ($this->options->themechange === "on") : ?>
 <button id="themeBtn" class="theme-toggle">切换主题</button>
 <div class="theme-panel">
   <div class="color-grid"></div>
@@ -182,10 +183,8 @@ window.addEventListener('DOMContentLoaded', () => {
    }
  });
 
-
-
-
 </script>
+<?php endif; ?>
 
 <?php if ($this->is('single')) : ?>
 <script>
