@@ -110,6 +110,11 @@ $commenton = new Typecho_Widget_Helper_Form_Element_Radio('commenton', array(
 ), 'null', _t('全站评论显示控制'), _t('默认显示评论'));
 $form->addInput($commenton -> multiMode());
 
+$themechange = new Typecho_Widget_Helper_Form_Element_Radio('themechange', array(
+    'on' => '开启切换按钮',
+    'off' => '关闭切换按钮'
+), 'off', _t('全站评论显示控制'), _t('默认关闭切换按钮'));
+$form->addInput($themechange -> multiMode());    
 
 $sliderGroup = new Typecho_Widget_Helper_Form_Element_Radio(
     'sliderGroup',
