@@ -47,9 +47,11 @@
 
 /* 主题面板 */
 .theme-panel {
-  position: fixed;  height: auto;
+  position: fixed;  
+  height: auto;
   max-height: 50%;
-  overflow-y: auto;  right: -350px;
+  overflow-y: auto;  
+  right: -350px;
   top: 60px;
   width: 280px;
   background: rgba(255,255,255,0.95);
