@@ -34,9 +34,9 @@
 
 <link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-webfont@1.1.0/lxgwwenkai-regular.css" media="all">
 
-  <!--  <?php if (method_exists($this, "header")): ?>
+    <?php if (method_exists($this, "header")): ?>
         <?php $this->header(); ?>
-    <?php endif; ?> -->
+    <?php endif; ?> 
 
     <?php if ($this->options->addhead): ?> 
         <?php echo $this->options->addhead; ?> 
