@@ -310,6 +310,68 @@ function searchTables() {
     // 在页面加载完成后执行计数函数
     window.onload = countRows;
 </script>
+
+<script>
+// 修正后的JS代码
+function initTabs() {
+     document.querySelectorAll('div[tabs]').forEach(tabsContainer => {
+        // 创建内容包裹容器
+        const contentWrapper = document.createElement('div');
+        contentWrapper.className = 'tab-content-wrapper';
+        
+        // 创建导航栏
+        const nav = document.createElement('div');
+        nav.className = 'tabs-nav';
+        
+        const contents = tabsContainer.querySelectorAll('div[tab-title]');
+        
+        // 移动内容到包裹容器
+        contents.forEach(content => {
+            contentWrapper.appendChild(content);
+            content.classList.add('tab-content');
+        });
+
+        // 创建导航按钮
+        contents.forEach((content, index) => {
+            const title = content.getAttribute('tab-title');
+            const button = document.createElement('button');
+            button.className = 'tab-title';
+            button.textContent = title;
+
+            button.addEventListener('click', () => {
+                // 移除所有激活状态
+                nav.querySelectorAll('.tab-title').forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                // 设置当前激活
+                button.classList.add('active');
+                content.classList.add('active');
+                
+                // 自动调整容器高度
+                contentWrapper.style.minHeight = content.scrollHeight + 'px';
+            });
+
+            nav.appendChild(button);
+            
+            if(index === 0) {
+                button.classList.add('active');
+                content.classList.add('active');
+                // 初始化容器高度
+                contentWrapper.style.minHeight = content.scrollHeight + 'px';
+            }
+        });
+
+        // 组装结构
+        tabsContainer.innerHTML = ''; // 清空原始内容
+        tabsContainer.appendChild(nav);
+        tabsContainer.appendChild(contentWrapper);
+    });
+}
+
+// 初始化时机保持不变
+
+document.addEventListener('DOMContentLoaded', initTabs);</script>
+
 <?php endif; ?>
 
 </body>
