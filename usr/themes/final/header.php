@@ -38,9 +38,9 @@
         <?php $this->header(); ?>
     <?php endif; ?>
 
-    <?php if ($this->options->addhead): ?>
-        <?php echo $this->options->addhead; ?>
-    <?php endif; ?>
+   <!-- <?php if ($this->options->addhead): ?> -->
+      <!--  <?php echo $this->options->addhead; ?> -->
+  <!--  <?php endif; ?> -->
 </head>
 <header>  
 </header>
