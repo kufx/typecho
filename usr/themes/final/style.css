@@ -878,7 +878,7 @@ h2::after, h3::after, h4::after, h5::after, h6::after { content: ""; position: a
 .xm-mm-input {
     margin-bottom: 1rem;
     position: relative;
-    background: rgba(255, 0, 0, 0.1);
+    background: var(--bg-color);
     color: var(--text-color);
 }
 
@@ -1026,6 +1026,98 @@ textarea {
   resize: vertical;
   max-width: 100%;
  
+}
+
+
+/* Tabs容器样式 */
+div[tabs] {
+    position: relative;
+    margin: 1.5em 0;
+    justify-content: center;
+  cursor: pointer;
+}
+
+/* 标签标题栏 */
+.tabs-nav {
+    display: flex;
+    gap: 0px;
+    margin-bottom: 0;
+    border-bottom: none;
+    overflow-x: auto;
+       
+}
+
+/* 单个标签标题 */
+.tab-title {
+    padding: 4px 8px;
+    color: var(--text-color);
+    background: var(--bg-color);
+    border: 1px solid var(--text-color);
+    border-bottom: none;
+    border-radius: 0px 0px 0 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    border-left: none;   
+}
+
+
+.tab-title:first-child {
+border-radius: .25rem 0 0 0;
+    border-left-width: 1px;
+}
+
+
+
+.tab-title:last-child {
+border-radius: 0 .25rem 0 0;    
+}
+
+
+
+/* 激活状态的标签标题 */
+.tab-title.active , .tab-title:active{
+ color: var(--bg-color);
+     background: var(--text-color);
+   // color: #007bff;
+    font-weight: bold;
+   
+ 
+}
+
+
+
+
+.tab-content-wrapper {
+    position: relative;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--text-color);
+    border-radius: 0 .25rem .25rem .25rem;
+}
+
+/* 内容容器 */
+.tab-content {
+    display: none;
+    padding: 8px;
+    overflow: hidden;
+    background: var(--bg-color);
+}
+
+/* 激活的内容 */
+.tab-content.active {
+    display: block;
+    border-radius: 0 .25rem .25rem .25rem;
+    animation: fadeIn 0.3s;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    position: relative; /* 保持文档流高度 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 
