@@ -293,7 +293,17 @@ $pattern = '/\[searchtb\]/';
 placeholder="输入【关键词】搜索..."><span id="resultInfo"></span> </center>';
     $content = preg_replace($pattern, $replacement, $content);
 
+$content = preg_replace_callback('/\[tabs\](.*?)\[\/tabs\]/s', function ($matches) {
+        $innerContent = $matches[1];
+        $innerContent = preg_replace_callback('/\[tab title="([^"]*)"\](.*?)\[\/tab\]/s', function ($tabMatches) {
+            $title = $tabMatches[1];
+            $tabContent = preg_replace('/^\s*<br\s*\/?>/', '', $tabMatches[2]);
+            return "<div tab-title=\"$title\">$tabContent</div>";
+        }, $innerContent);
+        return "<div tabs>$innerContent</div>";
+    }, $content);
 
+    
 return $content;
 
 }
