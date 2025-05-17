@@ -6,6 +6,23 @@
   },
 
 "routes": [
+
+    {
+      "src": "/admin/(.*)",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/install.php",
+      "dest": "/api/install.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.php",
+      "headers": {
+        "Cache-Control": "no-store"
+      }
+    },
+    
  { "src": "/(.*)", "dest": "/api/index.php" }
 ]
 
