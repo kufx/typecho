@@ -374,7 +374,7 @@ document.addEventListener('DOMContentLoaded', initTabs);</script>
 
 <?php endif; ?>
 
-<script>
+<!-- <script>
 // 页面加载完成后隐藏加载动画
 document.addEventListener("readystatechange", function() {
     const loader = document.getElementById('Loadanimation');
@@ -390,7 +390,8 @@ document.addEventListener("readystatechange", function() {
         }, 200); // 停留0.8秒
     }
 });
-</script>
+</script> -->
+
 
 
 </body>
