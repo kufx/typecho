@@ -381,13 +381,13 @@ document.addEventListener("readystatechange", function() {
     if (loader) {
         // 停留1秒后开始淡出
         setTimeout(function() {
-            loader.style.transition = 'opacity 2.5s';
+            loader.style.transition = 'opacity 1s';
             loader.style.opacity = '0';
             // 淡出完成后隐藏
             setTimeout(() => {
                 loader.style.display = 'none';
             }, 2600); // 等待淡出动画完成
-        }, 700); // 停留0.8秒
+        }, 200); // 停留0.8秒
     }
 });
 </script>
