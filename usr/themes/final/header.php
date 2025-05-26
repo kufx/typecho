@@ -42,7 +42,7 @@
         <?php echo $this->options->addhead; ?> 
   <?php endif; ?> 
 
-<style>
+<!-- <style>
 #Loadanimation{
    background-color:var(--bg-color);
    height:100vh; /* 改用视口单位 */
@@ -108,14 +108,14 @@
 @keyframes animate{
    50%{ transform: rotate(180deg); }
    100%{ transform: rotate(0deg); }
-}}</style>    
+}}</style>  -->  
 
 </head>
 <header>  
 </header>
 <body class="home">
 
-<div id="Loadanimation" style="z-index:999999;">
+<!-- <div id="Loadanimation" style="z-index:999999;">
 <div id="Loadanimation-center">
    <div id="Loadanimation-center-absolute">
        <div class="xccx_object" id="xccx_four"></div>
@@ -124,7 +124,7 @@
        <div class="xccx_object" id="xccx_one"></div>
    </div>
 </div>
-</div>
+</div> -->
 
 
     
