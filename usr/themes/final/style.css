@@ -185,7 +185,7 @@ pre code {
 
 blockquote {
     border-left: 5px solid var(--heading-color);
-    padding: 10px 15px;
+    padding: 0px 15px;
     margin: 10px 0;
     font-weight: bold;
     color: var(--blockquote-color);
